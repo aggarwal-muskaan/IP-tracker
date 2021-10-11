@@ -32,3 +32,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# CI/CD pipeline
+.github
