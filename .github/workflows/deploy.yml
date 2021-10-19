@@ -14,8 +14,8 @@ jobs:
           projectName: ip-tracker # name on Vercel
           envVariableKeys: NEXT_PUBLIC_BASE_URL,APIkey
         env:
-          APIkey: ${{ env.APIkey }}
-          NEXT_PUBLIC_BASE_URL: ${{ env.NEXT_PUBLIC_BASE_URL }}
+          APIkey: ${{ secrets.APIkey }}
+          NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }}
 
       # deploy app to vercel
       - name: deploy site to vercel
