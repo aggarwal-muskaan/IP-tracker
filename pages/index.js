@@ -1,8 +1,9 @@
 import Head from "next/head";
 import axios from "axios";
+import MainPage from "../components/MainPage";
 import styles from "../styles/Home.module.css";
 
-export default function Home() {
+export default function Home({ userIp }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -14,7 +15,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.png" sizes="16x16" type="image/png" />
       </Head>
 
-      <main>coming soon...</main>
+      <MainPage userIp={userIp} />
     </div>
   );
 }
@@ -24,8 +25,9 @@ export async function getStaticProps() {
 
   const response = await axios("https://api.ipify.org/?format=json");
   const { ip } = await response.data;
-  console.log(ip);
   return {
-    props: {},
+    props: {
+      userIp: ip,
+    },
   };
 }
