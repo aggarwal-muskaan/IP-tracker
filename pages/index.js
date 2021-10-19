@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Image from "next/image";
+import axios from "axios";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
@@ -22,9 +22,9 @@ export default function Home() {
 export async function getStaticProps() {
   // fetching ip address of user on initial load
 
-  const response = await fetch("https://api.ipify.org/?format=json");
-  const ip = await response.json();
-  console.log(ip.ip);
+  const response = await axios("https://api.ipify.org/?format=json");
+  const { ip } = await response.data;
+  console.log(ip);
   return {
     props: {},
   };
