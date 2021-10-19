@@ -10,7 +10,7 @@ jobs:
       - name: Set env vars on Vercel
         uses: dkershner6/vercel-set-env-action@v1
         with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
+          token: ${{ secrets.VERCEL_TOKEN }} # Required
           projectName: ip-tracker # name on Vercel
           envVariableKeys: NEXT_PUBLIC_BASE_URL,APIkey
         env:
