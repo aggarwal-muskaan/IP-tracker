@@ -1,19 +1,28 @@
 name: deploy ip-tracker to vercel
 on: [push, pull_request]
 jobs:
-  vercel: 
+  vercel:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      
+
       #add env file
+      - name: Set env vars on Vercel
+        uses: aggarwal-muskaan/vercel-set-env-action@v1
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
+          projectName: ip-tracker # name on Vercel
+          envVariableKeys: NEXT_PUBLIC_BASE_URL,APIkey
+        env:
+          APIkey: ${{ env.APIkey }}
+          NEXT_PUBLIC_BASE_URL: ${{ env.NEXT_PUBLIC_BASE_URL }}
 
       # deploy app to vercel
-      - name: deploy site to vercel      
+      - name: deploy site to vercel
         uses: amondnet/vercel-action@v20
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
-          # github-token: ${{ secrets.GITHUB_TOKEN }} #Optional 
+          # github-token: ${{ secrets.GITHUB_TOKEN }} #Optional
           # vercel-args: '--prod' #Optional
-          vercel-org-id: ${{ secrets.ORG_ID}}  #Required
+          vercel-org-id: ${{ secrets.ORG_ID}} #Required
           vercel-project-id: ${{ secrets.PROJECT_ID}} #Required
