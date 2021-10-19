@@ -14,7 +14,18 @@ export default function Home() {
         <link rel="icon" href="/favicon.png" sizes="16x16" type="image/png" />
       </Head>
 
-      <main>hii</main>
+      <main>coming soon...</main>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  // fetching ip address of user on initial load
+
+  const response = await fetch("https://api.ipify.org/?format=json");
+  const ip = await response.json();
+  console.log(ip.ip);
+  return {
+    props: {},
+  };
 }
