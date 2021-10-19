@@ -12,10 +12,14 @@ jobs:
         with:
           token: ${{ secrets.VERCEL_TOKEN }} # Required
           projectName: ip-tracker # name on Vercel
-          envVariableKeys: NEXT_PUBLIC_BASE_URL,APIkey
+          envVariableKeys: NEXT_PUBLIC_BASE_URL,APIKEY
         env:
-          APIkey: ${{ secrets.APIkey }}
+          APIKEY: ${{ secrets.APIKEY }}
+          TARGET_APIKEY: preview,development,production
+          TYPE_APIKEY: encrypted
           NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }}
+          TARGET_NEXT_PUBLIC_BASE_URL: preview,development,production
+          TYPE_NEXT_PUBLIC_BASE_URL: encrypted
 
       # deploy app to vercel
       - name: deploy site to vercel
