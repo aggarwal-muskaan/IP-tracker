@@ -1,10 +1,10 @@
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, createRef } from "react";
 import axios from "axios";
 import leftIcon from "../public/assets/icon-arrow.svg";
 
 function MainPage({ userIp }) {
-  const [input, setInput] = useState("");
+  const textInput = createRef();
 
   const findCountryDetails = async (searchIp = userIp) => {
     const ipAdd = `ipAddress=${searchIp}`;
@@ -26,7 +26,7 @@ function MainPage({ userIp }) {
   };
 
   const handleEnterOnly = (event) => {
-    if (event.key === "Enter") findCountryDetails(event.target.value);
+    if (event.key === "Enter") findCountryDetails(textInput.current.value);
   };
 
   return (
@@ -37,14 +37,13 @@ function MainPage({ userIp }) {
           <input
             type="text"
             placeholder="Search for any IP address or domain"
-            value={input}
-            onChange={(event) => handleInputChange(event)}
+            ref={textInput}
             onKeyDown={(event) => handleEnterOnly(event)}
           />
           <Image
             src={leftIcon}
             alt="search-icon"
-            onClick={findCountryDetails}
+            onClick={() => findCountryDetails(textInput.current.value)}
           />
         </div>
       </div>
