@@ -6,7 +6,7 @@ export const findByIp = async (searchIp) => {
 
   return axios
     .get(url)
-    .then((res) => res)
+    .then((res) => res.data)
     .catch((err) => err);
 };
 
@@ -16,6 +16,6 @@ export const findByDomain = async (searchDomain) => {
 
   return axios
     .get(url)
-    .then((res) => res)
+    .then((res) => res.data)
     .catch((err) => err);
 };
