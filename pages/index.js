@@ -1,11 +1,10 @@
 import Head from "next/head";
 import axios from "axios";
 import MainPage from "../components/MainPage";
-import styles from "../styles/Home.module.css";
 
 export default function Home({ userIp }) {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>IP Tracker</title>
         <meta

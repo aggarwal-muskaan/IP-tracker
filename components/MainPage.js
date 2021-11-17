@@ -2,6 +2,8 @@ import Image from "next/image";
 import React, { useState, useEffect, createRef } from "react";
 
 import { findByDomain, findByIp } from "../services/findLocation";
+import styles from "../styles/MainPage.module.css";
+
 import leftIcon from "../public/assets/icon-arrow.svg";
 
 function MainPage({ userIp }) {
@@ -63,7 +65,7 @@ function MainPage({ userIp }) {
 
   return (
     <>
-      <div>
+      <div className={styles.header}>
         <h2>IP Address Tracker</h2>
         <div style={{ backgroundColor: "black" }}>
           <input
