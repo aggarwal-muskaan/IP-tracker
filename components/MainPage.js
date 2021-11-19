@@ -2,6 +2,7 @@ import Image from "next/image";
 import React, { useState, useEffect, createRef } from "react";
 
 import { findByDomain, findByIp } from "../services/findLocation";
+import FindOnMap from "./FindOnMap";
 import styles from "../styles/MainPage.module.css";
 
 import leftIcon from "../public/assets/icon-arrow.svg";
@@ -13,9 +14,8 @@ function MainPage({ userIp }) {
     location: { lat: 0, lng: 0 },
   });
 
-  // destructuring my local state Object
+  // destructuring local state Object
   const { ip, country, timezone, isp } = state.info;
-  const { lat, lng } = state.location;
 
   useEffect(() => {
     findCountryDetails();
@@ -100,6 +100,8 @@ function MainPage({ userIp }) {
           </div>
         </div>
       </div>
+
+      <FindOnMap latLong={state.location} />
     </>
   );
 }
