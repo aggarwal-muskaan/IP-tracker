@@ -1,32 +1,34 @@
 import React, { useState, useEffect, useRef } from "react";
 import mapboxgl from "!mapbox-gl";
-
-mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
+// import "mapbox-gl.css";
 
 function FindOnMap({ latLong }) {
   const mapContainer = useRef(null);
-  // const map = useRef(null);
   const { lat, lng } = latLong;
+  mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
+
   useEffect(() => {
-    console.log(lat, lng);
     const map = new mapboxgl.Map({
       container: mapContainer.current,
-      style: "mapbox://styles/mapbox/streets-v11",
+      style: "mapbox://styles/mapbox/streets-v10",
       center: [lng, lat],
-      zoom: 11,
+      zoom: 14,
     });
+    new mapboxgl.Marker({
+      color: "#000",
+    })
+      .setLngLat([lng, lat])
+      .addTo(map);
 
     return () => map.remove();
   }, [latLong]);
 
   return (
-    <div>
-      <div
-        ref={mapContainer}
-        className="map-container"
-        style={{ height: "50vh" }}
-      />
-    </div>
+    <div
+      ref={mapContainer}
+      className="map-container"
+      style={{ height: "100vh" }}
+    />
   );
 }
 

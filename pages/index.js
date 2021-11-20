@@ -11,10 +11,16 @@ export default function Home({ userIp }) {
           name="description"
           content="IP address/Domain tracker created by Nextjs"
         />
+        <link
+          href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css"
+          rel="stylesheet"
+        />
         <link rel="icon" href="/favicon.png" sizes="16x16" type="image/png" />
       </Head>
 
-      <MainPage userIp={userIp} />
+      <div>
+        <MainPage userIp={userIp} />
+      </div>
     </div>
   );
 }
