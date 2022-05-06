@@ -4,10 +4,20 @@ export const findByIp = async (searchIp) => {
   const ipAdd = `ipAddress=${searchIp}`;
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}&${ipAdd}`;
 
-  return axios
+  return await axios
     .get(url)
-    .then((res) => res.data)
-    .catch((err) => err);
+    .then((res) => {
+      if (res.status === 200) return res.data;
+    })
+    .catch((err) => {
+      if (err.response) console.log("response");
+      if (err.request) {
+        console.log("request errors");
+      }
+      Promise.reject(err);
+      return false;
+      /* todo : special IP ignore, map center, responsive style, toast errors */
+    });
 };
 
 export const findByDomain = async (searchDomain) => {
