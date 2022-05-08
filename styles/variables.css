@@ -1,4 +1,6 @@
 :root {
   --very-darkgray: hsl(0, 0%, 17%);
   --dark-gray: hsl(0, 0%, 59%);
+  --white: #fff;
+  --border: hsla(0, 0%, 59%, 0.2);
 }

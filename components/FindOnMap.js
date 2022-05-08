@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import mapboxgl from "!mapbox-gl";
 // import "mapbox-gl.css";
+import styles from "../styles/MainPage.module.css";
 
 function FindOnMap({ latLong }) {
   const mapContainer = useRef(null);
@@ -26,8 +27,9 @@ function FindOnMap({ latLong }) {
   return (
     <div
       ref={mapContainer}
-      className="map-container"
-      style={{ height: "100vh" }}
+      // className="map-container"
+      // style={{ height: "80vh" }}
+      className={styles.mapBox}
     />
   );
 }

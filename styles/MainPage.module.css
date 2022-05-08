@@ -1,3 +1,4 @@
+/* @import url(./variables.css); */
 .container {
   min-height: 100vh;
   padding: 0 0.5rem;
@@ -10,6 +11,84 @@
 
 .header {
   background: url(../public/assets/bgPattern.png);
+  object-fit: cover;
+
+  height: 50vh;
+}
+
+.headingTracker {
+  color: var(--white);
+  padding: 1.5rem;
+  margin: auto;
+  width: fit-content;
+}
+
+.inputField {
+  width: 85%;
+  margin: auto;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+.inputContainer {
+  background: var(--white);
+  padding: 0.8rem;
+  border-top-left-radius: 11px;
+  border-bottom-left-radius: 11px;
+
+  height: 51px;
+  width: 100%;
+}
+.textInput {
+  outline: none;
+  border: none;
+  width: 100%;
+  height: 100%;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: normal;
+}
+.forwardIcon {
+  width: 2.5rem;
+  height: 51px;
+  height: 100%;
+  background-color: black;
+  border-top-right-radius: 11px;
+  border-bottom-right-radius: 11px;
+  padding: 0.8rem;
+}
+
+.addressDetails {
+  background: var(--white);
+  border-radius: 11px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 85%;
+  margin: auto;
+  padding: 1.2rem 1.2rem 0;
+  z-index: 999;
+
+  position: absolute;
+  top: 24%;
+  margin-top: 1.5rem;
+  left: 8%;
+}
+.detailContainer {
+  display: flex;
+  flex-direction: column;
+}
+.detailLabel {
+  color: var(--dark-gray);
+  margin: auto;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.detailInfo {
+  color: var(--very-darkgray);
+  text-align: center;
+  margin: 0.3rem auto 1rem auto;
 }
 
 /* .footer {
@@ -27,3 +106,48 @@
   align-items: center;
   flex-grow: 1;
 } */
+@media (min-width: 748px) {
+  .header {
+    height: 40vh;
+    /* background-repeat: no-repeat; */
+  }
+
+  .addressDetails {
+    top: 23%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header {
+    height: 35vh;
+  }
+  .inputField {
+    width: 44%;
+  }
+  .addressDetails {
+    flex-direction: row;
+    min-height: 120px;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    width: 75%;
+    left: 12.5%;
+  }
+  .detailContainer {
+    justify-content: space-between;
+    height: 50%;
+    /* border-left: 2px solid var(--border); */
+  }
+  /* .detailContainer:first-child {
+    border-left: none;
+  } */
+  .detailContainer:last-child {
+    max-width: 400px;
+  }
+  .detailLabel {
+    margin: unset;
+  }
+  .mapBox {
+    height: 65vh;
+  }
+}

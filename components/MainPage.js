@@ -65,37 +65,42 @@ function MainPage({ userIp }) {
   return (
     <>
       <div className={styles.header}>
-        <h2>IP Address Tracker</h2>
-        <div style={{ backgroundColor: "black" }}>
-          <input
-            type="text"
-            placeholder="Search for any IP address or domain"
-            ref={textInput}
-            onKeyDown={(event) => handleEnterOnly(event)}
-          />
-          <Image
-            src={leftIcon}
-            alt="search-icon"
-            onClick={() => findCountryDetails(textInput.current.value)}
-          />
+        <h2 className={styles.headingTracker}>IP Address Tracker</h2>
+        <div className={styles.inputField}>
+          <div className={styles.inputContainer}>
+            <input
+              type="text"
+              placeholder="Search for any IP address or domain"
+              ref={textInput}
+              onKeyDown={(event) => handleEnterOnly(event)}
+              className={styles.textInput}
+            />
+          </div>
+          <div className={styles.forwardIcon}>
+            <Image
+              src={leftIcon}
+              alt="search-icon"
+              onClick={() => findCountryDetails(textInput.current.value)}
+            />
+          </div>
         </div>
 
-        <div>
-          <div>
-            <small>IP Address</small>
-            <h3>{ip}</h3>
+        <div className={styles.addressDetails}>
+          <div className={styles.detailContainer}>
+            <small className={styles.detailLabel}>IP Address</small>
+            <h3 className={styles.detailInfo}>{ip}</h3>
           </div>
-          <div>
-            <small>location</small>
-            <h3>{country}</h3>
+          <div className={styles.detailContainer}>
+            <small className={styles.detailLabel}>location</small>
+            <h3 className={styles.detailInfo}>{country}</h3>
           </div>
-          <div>
-            <small>Timezone</small>
-            <h3>{timezone}</h3>
+          <div className={styles.detailContainer}>
+            <small className={styles.detailLabel}>Timezone</small>
+            <h3 className={styles.detailInfo}>{timezone}</h3>
           </div>
-          <div>
-            <small>ISP</small>
-            <h3>{isp}</h3>
+          <div className={styles.detailContainer}>
+            <small className={styles.detailLabel}>ISP</small>
+            <h3 className={styles.detailInfo}>{isp}</h3>
           </div>
         </div>
       </div>
