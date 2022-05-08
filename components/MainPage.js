@@ -35,7 +35,7 @@ function MainPage({ userIp }) {
       // user's IP
       response = await findByIp(userInput);
     }
-    updateLocation(response);
+    if (response.location) updateLocation(response);
   };
 
   const isDomain = (userInput) => {
@@ -54,7 +54,6 @@ function MainPage({ userIp }) {
       info: { ip: ip, country: newCountry, timezone: newTimezone, isp: isp },
       location: { lat: lat, lng: lng },
     };
-
     // setting state
     setState(newState);
   };
