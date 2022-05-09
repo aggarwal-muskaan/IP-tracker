@@ -15,6 +15,9 @@ function FindOnMap({ latLong }) {
       center: [lng, lat],
       zoom: 14,
     });
+    // disable map zoom when using scroll
+    map.scrollZoom.disable();
+
     new mapboxgl.Marker({
       color: "#000",
     })
