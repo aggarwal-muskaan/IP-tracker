@@ -2,6 +2,7 @@ import Head from "next/head";
 // import { useEffect } from "react";
 import axios from "axios";
 import MainPage from "../components/MainPage";
+import { ToastContainer } from "react-toastify";
 
 export default function Home({ userIp }) {
   // useEffect(() => {
@@ -108,6 +109,7 @@ export default function Home({ userIp }) {
       <div>
         <MainPage userIp={userIp} />
       </div>
+      <ToastContainer />
     </div>
   );
 }

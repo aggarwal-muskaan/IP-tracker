@@ -32,6 +32,21 @@ a.mapboxgl-ctrl-logo {
   height: 100% !important;
 }
 
+/* overriding styles for react-toastify messages */
+div.Toastify__toast-container.Toastify__toast-container--top-center {
+  width: unset !important;
+  /* width: 500px; */
+}
+div.Toastify__toast-icon.Toastify--animate-icon.Toastify__zoom-enter svg {
+  fill: white;
+}
+div.Toastify__toast--error {
+  background: var(--error);
+  color: white;
+  font-weight: bolder;
+  font-family: "Rubik", sans-serif;
+}
+
 .ad-zone {
   height: 10px;
 }
