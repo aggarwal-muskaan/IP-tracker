@@ -3,6 +3,8 @@ import React, { useState, useEffect, createRef } from "react";
 
 import { findByDomain, findByIp } from "../services/findLocation";
 import FindOnMap from "./FindOnMap";
+import { validateIP, validateDomain } from "./utils/validateIP";
+import { errorToast } from "./utils/errorToast";
 import styles from "../styles/MainPage.module.css";
 
 import leftIcon from "../public/assets/icon-arrow.svg";
@@ -24,7 +26,7 @@ function MainPage({ userIp }) {
 
     // console.log(navigator.brave, navigator.brave.isBrave()); true for Brave-browser
     if (x_height) {
-      adBlocker.remove();
+      adBlocker.style.display = "none";
       findCountryDetails();
     } else {
       setExtensionState(true);
@@ -37,10 +39,13 @@ function MainPage({ userIp }) {
     if (userInput !== userIp) {
       if (isDomain(userInput)) {
         // searched input is a Domain name
-        response = await findByDomain(userInput);
+        if (validateIP(userInput)) response = await findByDomain(userInput);
+        else errorToast("Invalid IP-address or domain");
+      } else {
+        // searched input is a IP address
+        if (validateDomain(userInput)) response = await findByIp(userInput);
+        else errorToast("Invalid IP-address or domain");
       }
-      // searched input is a IP address
-      else response = await findByIp(userInput);
     } else {
       // user's IP
       response = await findByIp(userInput);
