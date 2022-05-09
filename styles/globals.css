@@ -31,3 +31,7 @@ a.mapboxgl-ctrl-logo {
   .mapboxgl-canvas {
   height: 100% !important;
 }
+
+.ad-zone {
+  height: 10px;
+}

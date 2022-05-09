@@ -8,6 +8,7 @@ import styles from "../styles/MainPage.module.css";
 import leftIcon from "../public/assets/icon-arrow.svg";
 
 function MainPage({ userIp }) {
+  const [isAdBlockExtension, setExtensionState] = useState(false);
   const textInput = createRef();
   const [state, setState] = useState({
     info: { ip: "", country: "", timezone: "", isp: "" },
@@ -18,7 +19,16 @@ function MainPage({ userIp }) {
   const { ip, country, timezone, isp } = state.info;
 
   useEffect(() => {
-    findCountryDetails();
+    const adBlocker = document.querySelector(".ad-zone");
+    const x_height = adBlocker.offsetHeight;
+
+    // console.log(navigator.brave, navigator.brave.isBrave()); true for Brave-browser
+    if (x_height) {
+      adBlocker.remove();
+      findCountryDetails();
+    } else {
+      setExtensionState(true);
+    }
   }, []);
 
   const findCountryDetails = async (rawUserInput = userIp) => {
@@ -64,6 +74,8 @@ function MainPage({ userIp }) {
 
   return (
     <>
+      <div className="ad-zone ad-space ad-unit textads banner-ads banner_ads" />
+
       <div className={styles.header}>
         <h2 className={styles.headingTracker}>IP Address Tracker</h2>
         <div className={styles.inputField}>
@@ -73,10 +85,17 @@ function MainPage({ userIp }) {
               placeholder="Search for any IP address or domain"
               ref={textInput}
               onKeyDown={(event) => handleEnterOnly(event)}
-              className={styles.textInput}
+              className={`${styles.textInput} ${
+                isAdBlockExtension && styles.disableTextInput
+              }`}
+              disabled={isAdBlockExtension}
             />
           </div>
-          <div className={styles.forwardIcon}>
+          <div
+            className={`${styles.forwardIcon} ${
+              isAdBlockExtension && styles.disableTextInput
+            }`}
+          >
             <Image
               src={leftIcon}
               alt="search-icon"
@@ -85,24 +104,32 @@ function MainPage({ userIp }) {
           </div>
         </div>
 
-        <div className={styles.addressDetails}>
-          <div className={styles.detailContainer}>
-            <small className={styles.detailLabel}>IP Address</small>
-            <h3 className={styles.detailInfo}>{ip}</h3>
+        {isAdBlockExtension ? (
+          <div className={styles.addressDetails}>
+            <p className={styles.centerText}>
+              Please remove Ad-blocker to access the site.
+            </p>
           </div>
-          <div className={styles.detailContainer}>
-            <small className={styles.detailLabel}>location</small>
-            <h3 className={styles.detailInfo}>{country}</h3>
+        ) : (
+          <div className={styles.addressDetails}>
+            <div className={styles.detailContainer}>
+              <small className={styles.detailLabel}>IP Address</small>
+              <h3 className={styles.detailInfo}>{ip}</h3>
+            </div>
+            <div className={styles.detailContainer}>
+              <small className={styles.detailLabel}>location</small>
+              <h3 className={styles.detailInfo}>{country}</h3>
+            </div>
+            <div className={styles.detailContainer}>
+              <small className={styles.detailLabel}>Timezone</small>
+              <h3 className={styles.detailInfo}>{timezone}</h3>
+            </div>
+            <div className={styles.detailContainer}>
+              <small className={styles.detailLabel}>ISP</small>
+              <h3 className={styles.detailInfo}>{isp}</h3>
+            </div>
           </div>
-          <div className={styles.detailContainer}>
-            <small className={styles.detailLabel}>Timezone</small>
-            <h3 className={styles.detailInfo}>{timezone}</h3>
-          </div>
-          <div className={styles.detailContainer}>
-            <small className={styles.detailLabel}>ISP</small>
-            <h3 className={styles.detailInfo}>{isp}</h3>
-          </div>
-        </div>
+        )}
       </div>
 
       <FindOnMap latLong={state.location} />

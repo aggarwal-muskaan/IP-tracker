@@ -10,7 +10,7 @@ export const findByIp = async (searchIp) => {
       if (res.status === 200) return res.data;
     })
     .catch((err) => {
-      if (err.response) console.log("response");
+      if (err.response) console.log("response", err.response);
       if (err.request) {
         console.log("request errors", err.request);
       }
