@@ -15,6 +15,9 @@
 
   height: 50vh;
 }
+.mapBox {
+  height: 80vh;
+}
 
 .headingTracker {
   color: var(--white);
@@ -52,6 +55,7 @@
   width: 2.5rem;
   height: 51px;
   height: 100%;
+  cursor: pointer;
   background-color: black;
   border-top-right-radius: 11px;
   border-bottom-right-radius: 11px;
@@ -115,9 +119,12 @@
   .addressDetails {
     top: 23%;
   }
+  /* .mapBox {
+    height: 60vh;
+  } */
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
   .header {
     height: 35vh;
   }
@@ -129,6 +136,7 @@
     min-height: 120px;
     justify-content: space-between;
     align-items: flex-start;
+    padding-bottom: 1.2rem;
 
     width: 75%;
     left: 12.5%;
@@ -137,16 +145,18 @@
     justify-content: space-between;
     height: 50%;
     /* border-left: 2px solid var(--border); */
+    max-width: 25%;
   }
   /* .detailContainer:first-child {
     border-left: none;
   } */
-  .detailContainer:last-child {
-    max-width: 400px;
-  }
-  .detailLabel {
+
+  .detailLabel,
+  .detailInfo {
     margin: unset;
+    text-align: start;
   }
+
   .mapBox {
     height: 65vh;
   }
