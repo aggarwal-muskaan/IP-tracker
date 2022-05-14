@@ -39,18 +39,18 @@ function MainPage({ userIp }) {
     if (userInput !== userIp) {
       if (isDomain(userInput)) {
         // searched input is a Domain name
-        if (validateIP(userInput)) response = await findByDomain(userInput);
-        else errorToast("Invalid IP-address or domain");
+        if (validateDomain(userInput)) response = await findByDomain(userInput);
+        else errorToast("Invalid Domain");
       } else {
         // searched input is a IP address
-        if (validateDomain(userInput)) response = await findByIp(userInput);
-        else errorToast("Invalid IP-address or domain");
+        if (validateIP(userInput)) response = await findByIp(userInput);
+        else errorToast("Invalid IP-address");
       }
     } else {
       // user's IP
       response = await findByIp(userInput);
     }
-    if (response.location) updateLocation(response);
+    if (response && response.location) updateLocation(response);
   };
 
   const isDomain = (userInput) => {

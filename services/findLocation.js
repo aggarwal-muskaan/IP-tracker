@@ -1,4 +1,5 @@
 import axios from "axios";
+import { errorToast } from "../components/utils/errorToast";
 
 export const findByIp = async (searchIp) => {
   const ipAdd = `ipAddress=${searchIp}`;
@@ -10,11 +11,15 @@ export const findByIp = async (searchIp) => {
       if (res.status === 200) return res.data;
     })
     .catch((err) => {
-      if (err.response) console.log("response", err.response);
-      if (err.request) {
+      if (err.response) {
+        console.log("response", err.response);
+        errorToast(err.response.data.messages);
+        Promise.reject(err.response);
+      } else if (err.request) {
         console.log("request errors", err.request);
+        errorToast(err.request.data.messages);
+        Promise.reject(err.request);
       }
-      Promise.reject(err);
       return false;
       /* todo : special IP ignore, map center, responsive style, toast errors */
     });

@@ -14,9 +14,13 @@ function FindOnMap({ latLong }) {
       style: "mapbox://styles/mapbox/streets-v10",
       center: [lng, lat],
       zoom: 14,
+      // minZoom: 14,
     });
     // disable map zoom when using scroll
     map.scrollZoom.disable();
+    map.doubleClickZoom.disable();
+    map.dragRotate.disable();
+    map.boxZoom.disable();
 
     new mapboxgl.Marker({
       color: "#000",
