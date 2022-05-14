@@ -14,7 +14,6 @@ function FindOnMap({ latLong }) {
       style: "mapbox://styles/mapbox/streets-v10",
       center: [lng, lat],
       zoom: 14,
-      // minZoom: 14,
     });
     // disable map zoom when using scroll
     map.scrollZoom.disable();
@@ -31,14 +30,7 @@ function FindOnMap({ latLong }) {
     return () => map.remove();
   }, [latLong]);
 
-  return (
-    <div
-      ref={mapContainer}
-      // className="map-container"
-      // style={{ height: "80vh" }}
-      className={styles.mapBox}
-    />
-  );
+  return <div ref={mapContainer} className={styles.mapBox} />;
 }
 
 export default FindOnMap;

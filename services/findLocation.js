@@ -21,7 +21,6 @@ export const findByIp = async (searchIp) => {
         Promise.reject(err.request);
       }
       return false;
-      /* todo : special IP ignore, map center, responsive style, toast errors */
     });
 };
 
@@ -32,5 +31,16 @@ export const findByDomain = async (searchDomain) => {
   return axios
     .get(url)
     .then((res) => res.data)
-    .catch((err) => err);
+    .catch((err) => {
+      if (err.response) {
+        console.log("response", err.response);
+        errorToast(err.response.data.messages);
+        Promise.reject(err.response);
+      } else if (err.request) {
+        console.log("request errors", err.request);
+        errorToast(err.request.data.messages);
+        Promise.reject(err.request);
+      }
+      return false;
+    });
 };
