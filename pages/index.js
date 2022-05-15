@@ -1,95 +1,20 @@
 import Head from "next/head";
-// import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import MainPage from "../components/MainPage";
 import { ToastContainer } from "react-toastify";
 
 export default function Home({ userIp }) {
-  // useEffect(() => {
-  //   window.addEventListener("orientationchange", checkOrientationChange);
-  // }, []);
-
-  // function checkOrientationChange() {
-  //   console.log("lock");
-  //   let screenOrientation = window.orientation;
-  //   switch (screenOrientation) {
-  //     case 0:
-  //       console.log("you are in portrait-primary mode");
-  //       break;
-  //     case 90:
-  //       goFullScreen();
-  //       break;
-  //     case 180:
-  //       goFullScreen();
-  //       break;
-  //     case 270:
-  //       goFullScreen();
-  //       break;
-  //     default:
-  //       console.log("implementation of screen orientation");
-  //   }
-  // }
-
-  // // function to request full screen of device browser
-
-  // function goFullScreen() {
-  //   var elem = document.getElementById("__next");
-  //   if (elem.requestFullscreen) {
-  //     elem.requestFullscreen().then(
-  //       (data) => {
-  //         lockScreenOrientation();
-  //       },
-  //       (err) => {
-  //         console.log("no");
-  //       }
-  //     );
-  //   } else if (elem.mozRequestFullScreen) {
-  //     /* Firefox */
-  //     elem.mozRequestFullScreen().then(
-  //       (data) => {
-  //         lockScreenOrientation();
-  //       },
-  //       (err) => {
-  //         console.log("Full Screen request failed");
-  //       }
-  //     );
-  //   } else if (elem.webkitRequestFullscreen) {
-  //     /* Chrome, Safari & Opera */
-  //     elem.webkitRequestFullscreen().then(
-  //       (data) => {
-  //         lockScreenOrientation();
-  //       },
-  //       (err) => {
-  //         console.log("Full Screen request failed");
-  //       }
-  //     );
-  //   } else if (elem.msRequestFullscreen) {
-  //     /* IE/Edge */
-  //     elem.msRequestFullscreen().then(
-  //       (data) => {
-  //         lockScreenOrientation();
-  //       },
-  //       (err) => {
-  //         console.log("Full Screen request failed");
-  //       }
-  //     );
-  //   }
-  // }
-
-  // //function to lock the screen. in this case the screen will be locked in portrait-primary mode.
-
-  // function lockScreenOrientation() {
-  //   screen.lockOrientationUniversal =
-  //     screen.lockOrientation ||
-  //     screen.mozLockOrientation ||
-  //     screen.msLockOrientation;
-
-  //   if (screen.lockOrientationUniversal("landscape-primary")) {
-  //     // Orientation was locked
-  //   } else {
-  //     // Orientation lock failed
-  //   }
-  // }
+  const [clientIp, setClientIp] = useState(userIp);
+  useEffect(() => {
+    const findClientAddress = async () => {
+      const response = await axios("https://api.ipify.org/?format=json");
+      const { ip } = await response.data;
+      setClientIp(ip);
+    };
+    // fetching ip address of user on initial load
+    findClientAddress();
+  }, []);
 
   return (
     <div>
@@ -107,7 +32,7 @@ export default function Home({ userIp }) {
       </Head>
 
       <div>
-        <MainPage userIp={userIp} />
+        <MainPage userIp={clientIp} />
       </div>
       <ToastContainer />
     </div>
@@ -115,7 +40,7 @@ export default function Home({ userIp }) {
 }
 
 export async function getStaticProps() {
-  // fetching ip address of user on initial load
+  // fetching ip address of server on initial load
 
   const response = await axios("https://api.ipify.org/?format=json");
   const { ip } = await response.data;
