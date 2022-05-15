@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useState, useEffect, createRef } from "react";
+import React, { useState, useLayoutEffect, createRef, useRef } from "react";
 
 import { findByDomain, findByIp } from "../services/findLocation";
 import FindOnMap from "./FindOnMap";
@@ -12,6 +12,7 @@ import leftIcon from "../public/assets/icon-arrow.svg";
 function MainPage({ userIp }) {
   const [isAdBlockExtension, setExtensionState] = useState(false);
   const textInput = createRef();
+  const firstLoad = useRef(true);
   const [state, setState] = useState({
     info: { ip: "", country: "", timezone: "", isp: "" },
     location: { lat: 0, lng: 0 },
@@ -20,31 +21,37 @@ function MainPage({ userIp }) {
   // destructuring local state Object
   const { ip, country, timezone, isp } = state.info;
 
-  useEffect(() => {
-    const adBlocker = document.querySelector(".ad-zone");
-    const x_height = adBlocker.offsetHeight;
+  useLayoutEffect(() => {
+    if (firstLoad.current) {
+      const adBlocker = document.querySelector(".ad-zone");
+      const x_height = adBlocker.offsetHeight;
 
-    // console.log(navigator.brave, navigator.brave.isBrave()); true for Brave-browser
-    if (x_height) {
-      adBlocker.style.display = "none";
-      findCountryDetails();
-    } else {
-      setExtensionState(true);
-    }
+      // console.log(navigator.brave, navigator.brave.isBrave()); true for Brave-browser
+      if (x_height) {
+        adBlocker.style.display = "none";
+        findCountryDetails();
+      } else {
+        setExtensionState(true);
+      }
+    } else firstLoad.current = false;
   }, []);
 
   const findCountryDetails = async (rawUserInput = userIp) => {
     const userInput = rawUserInput.trim();
     let response;
     if (userInput !== userIp) {
-      if (isDomain(userInput)) {
-        // searched input is a Domain name
-        if (validateDomain(userInput)) response = await findByDomain(userInput);
-        else errorToast("Invalid Domain");
-      } else {
-        // searched input is a IP address
-        if (validateIP(userInput)) response = await findByIp(userInput);
-        else errorToast("Invalid IP-address");
+      if (userInput === "") errorToast("Empty input registered!");
+      else {
+        if (isDomain(userInput)) {
+          // searched input is a Domain name
+          if (validateDomain(userInput))
+            response = await findByDomain(userInput);
+          else errorToast("Invalid Domain");
+        } else {
+          // searched input is a IP address
+          if (validateIP(userInput)) response = await findByIp(userInput);
+          else errorToast("Invalid IP-address");
+        }
       }
     } else {
       // user's IP
