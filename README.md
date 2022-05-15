@@ -1,34 +1,27 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## About
 
-## Getting Started
+This is a new challenge from [Frontend Mentor](https://www.frontendmentor.io/challenges).  
+I started this project to get familiar with Next.js but have realized Full Stack app would be more useful to explore Next.js to the best.
 
-First, run the development server:
+## Focused Features
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+1. User can search IP addresses / domains, see their key information
+1. Resulted location will plot on the map (using lib - Mapbox)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Takeaways
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- Setup Github CI/CD in the beginning of the project.
+- Deployed on Vercel & got to know an amazing feature - Automatic URLs  
+  It is really easy to make a production deployment on Vercel. Learn more about it from [here](https://vercel.com/docs/concepts/deployments/automatic-urls)
+- Since the public API we're using for gathering details contains 'address' keyword in its query parameter, thus getting blocked by Brave browser/ Ad-block extension users (restricts ad). Learnt a way to detect those extension before hitting the API to handle the Network error.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+### Try it 👇
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+[Live Demo](https://ip-domain-tracker.vercel.app/ "IP-Tracker App")
 
-## Learn More
+## Suggestion
 
-To learn more about Next.js, take a look at the following resources:
+I want to initialize the app with IP Address of client's machine. Currently, you'll see the details of the server IP Address on which it's deployed, on the first load.  
+Feel free to raise a PR. 😃
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### 🔆 Build with Next.js + CSS Modules 🔆
