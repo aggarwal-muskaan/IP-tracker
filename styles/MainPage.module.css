@@ -84,7 +84,7 @@
 
   position: absolute;
   top: 24%;
-  margin-top: 1.5rem;
+  margin-top: 4rem;
   left: 8%;
 }
 .detailContainer {
@@ -112,6 +112,7 @@
 
   .addressDetails {
     top: 23%;
+    margin-top: 2.5rem;
   }
   /* .mapBox {
     height: 60vh;
@@ -134,6 +135,7 @@
 
     width: 75%;
     left: 12.5%;
+    margin-top: 1.5rem;
   }
   .detailContainer {
     justify-content: space-between;

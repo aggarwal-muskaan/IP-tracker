@@ -47,6 +47,15 @@ div.Toastify__toast--error {
   font-family: "Rubik", sans-serif;
 }
 
+@media only screen and (max-width: 480px) {
+  .Toastify__toast-container {
+    left: 80px !important;
+  }
+  .Toastify__toast-container--top-center {
+    top: 4px !important;
+  }
+}
+
 .ad-zone {
   height: 10px;
 }
